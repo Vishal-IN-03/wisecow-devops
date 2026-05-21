@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+
+metadata:
+  name: wisecow-network-policy
+
+spec:
+  podSelector:
+    matchLabels:
+      app: wisecow
+
+  policyTypes:
+  - Ingress
+
+  ingress:
+  - from:
+    - podSelector: {}

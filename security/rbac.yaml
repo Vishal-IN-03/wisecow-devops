@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ServiceAccount
+
+metadata:
+  name: wisecow-sa
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+
+metadata:
+  name: wisecow-role
+
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+
+  verbs:
+  - get
+  - list
+  - watch
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+
+metadata:
+  name: wisecow-rolebinding
+
+subjects:
+- kind: ServiceAccount
+  name: wisecow-sa
+
+roleRef:
+  kind: Role
+  name: wisecow-role
+  apiGroup: rbac.authorization.k8s.io
